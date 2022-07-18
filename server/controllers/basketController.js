@@ -22,18 +22,16 @@ class BasketController {
 			order: sequelize.literal("id"),
 			include: [{model: Device, as: "device"}]
 		})
-		return res.json(basketDevices)
+		return res.status(201).json(basketDevices)
 	}
 	
 	async deleteOne(req, res, next) {
-		console.log("deleteOne")
 		const basket = await Basket.findOne({where: {id: req.user.id}})
 		if (!basket) {
 			return next(ApiError.notFound("Basket not found"))
 		}
 		
-		let {id} = req.query
-		id = Number(id)
+		const id = req.params.id
 		if (!id) {
 			return next(ApiError.badRequest("No id"))
 		}
@@ -54,7 +52,7 @@ class BasketController {
 	async getAll(req, res) {
 		let basket = await Basket.findOne({where: {id: req.user.id}})
 		if (!basket) {
-			basket = await Basket.create()
+			await Basket.create()
 			return res.json([])
 		}
 		

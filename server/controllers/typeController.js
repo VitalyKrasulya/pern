@@ -1,4 +1,4 @@
-const {Type, Brand} = require("./../models/models")
+const {Type} = require("./../models/models")
 const ApiError = require("./../error/ApiError")
 const sequelize = require("sequelize");
 
@@ -10,7 +10,7 @@ class TypeController {
 			return next(ApiError.forbidden("Type with same name already exist"))
 		}
 		const type = await Type.create({name})
-		return res.json(type)
+		return res.status(201).json(type)
 	}
 	
 	

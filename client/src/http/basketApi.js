@@ -11,6 +11,6 @@ export const addDeviceToBasket = async (device) => {
 }
 
 export const deleteFromBasket = async (basketItem) => {
-	const {data} = await $authHost.delete(`api/basket?id=${basketItem.id}`)
+	const {data} = await $authHost.delete(`api/basket/${basketItem.id}`)
 	return data
 }

@@ -32,7 +32,7 @@ class DeviceController {
 			}
 			
 			
-			return res.json(device)
+			return res.status(201).json(device)
 		} catch (e) {
 			next(ApiError.internal(e.message))
 		}

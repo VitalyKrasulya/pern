@@ -10,7 +10,7 @@ class BrandController {
 			return next(ApiError.forbidden("Brand with same name already exist"))
 		}
 		const brand = await Brand.create({name})
-		return res.json(brand)
+		return res.status(201).json(brand)
 	}
 	
 	
